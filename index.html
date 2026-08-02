@@ -1,1 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solongo Boldtseren — Supply Chain & Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F2A24;
+    --paper: #F0F2EF;
+    --paper-alt: #E4E8E1;
+    --green: #4A7C59;
+    --green-dark: #2F4E38;
+    --copper: #A8763E;
+    --slate: #5B6B66;
+    --white: #FBFBFA;
+    --line: rgba(31,42,36,0.14);
+    --font-display: 'Fraunces', serif;
+    --font-body: 'IBM Plex Sans', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(240,242,239,0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .nav-mark {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--green-dark);
+  }
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .nav-links a {
+    color: var(--slate);
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: var(--green-dark); }
+  .nav-links a:focus-visible, a:focus-visible {
+    outline: 2px solid var(--green);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero {
+    padding: 110px 0 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bin-grid {
+    position: absolute;
+    top: -40px;
+    right: -60px;
+    display: grid;
+    grid-template-columns: repeat(6, 14px);
+    grid-auto-rows: 14px;
+    gap: 6px;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .bin-grid span {
+    width: 14px; height: 14px;
+    background: var(--paper-alt);
+    border-radius: 2px;
+  }
+  .bin-grid span.a { background: var(--copper); opacity: 0.55; }
+  .bin-grid span.b { background: var(--green); opacity: 0.4; }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 7px; height: 7px;
+    background: var(--copper);
+    border-radius: 1px;
+    display: inline-block;
+  }
+
+  h1.name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(42px, 6.4vw, 74px);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 780px;
+  }
+
+  .role-line {
+    font-family: var(--font-body);
+    font-size: clamp(17px, 2vw, 21px);
+    color: var(--slate);
+    margin-top: 20px;
+    max-width: 560px;
+  }
+  .role-line strong { color: var(--green-dark); font-weight: 600; }
+
+  .hero-links {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 100px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    color: var(--ink);
+    transition: all 0.2s ease;
+  }
+  .pill:hover {
+    border-color: var(--green);
+    color: var(--green-dark);
+    transform: translateY(-1px);
+  }
+  .pill.primary {
+    background: var(--green-dark);
+    color: var(--white);
+    border-color: var(--green-dark);
+  }
+  .pill.primary:hover { background: var(--green); color: var(--white); }
+
+  /* ---------- SECTION SHARED ---------- */
+  section { padding: 84px 0; }
+  .section-alt { background: var(--paper-alt); }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--copper);
+  }
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.4vw, 38px);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ---------- JOURNEY / ROUTE MAP ---------- */
+  .route {
+    position: relative;
+    padding-top: 8px;
+  }
+  .route-line {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: repeating-linear-gradient(90deg, var(--slate) 0 8px, transparent 8px 14px);
+    opacity: 0.5;
+  }
+  .route-stops {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    position: relative;
+  }
+  .stop {
+    padding-top: 34px;
+    position: relative;
+  }
+  .stop::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20px; height: 20px;
+    background: var(--paper);
+    border: 2px solid var(--green-dark);
+    border-radius: 3px;
+    transform: rotate(45deg);
+  }
+  .stop.current::before {
+    background: var(--copper);
+    border-color: var(--copper);
+  }
+  .stop-year {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--copper);
+    letter-spacing: 0.03em;
+    margin-bottom: 6px;
+  }
+  .stop-role {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .stop-org {
+    font-size: 13px;
+    color: var(--slate);
+    margin-bottom: 8px;
+  }
+  .stop-desc {
+    font-size: 13px;
+    color: var(--slate);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 880px) {
+    .route-line { display: none; }
+    .route-stops { grid-template-columns: 1fr; gap: 28px; }
+    .stop { padding-left: 34px; padding-top: 0; }
+    .stop::before { top: 2px; left: 0; }
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-text {
+    max-width: 720px;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .about-text p { margin-bottom: 20px; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-text em { color: var(--green-dark); font-style: italic; }
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 780px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  .project-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .project-card:hover {
+    border-color: var(--green);
+    transform: translateY(-2px);
+  }
+  .project-tag {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--copper);
+    margin-bottom: 14px;
+  }
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .project-desc {
+    font-size: 14.5px;
+    color: var(--slate);
+    margin-bottom: 22px;
+    flex-grow: 1;
+  }
+  .project-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .project-links a {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    transition: all 0.2s ease;
+  }
+  .project-links a:hover {
+    border-color: var(--green-dark);
+    background: var(--green-dark);
+    color: var(--white);
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  @media (max-width: 780px) { .skills-grid { grid-template-columns: 1fr; } }
+  .skill-group h3 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--slate);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .skill-tags span {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    padding: 6px 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--ink);
+  }
+
+  /* ---------- CONTACT / FOOTER ---------- */
+  footer {
+    padding: 90px 0 60px;
+    text-align: center;
+  }
+  footer h2 {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  footer p {
+    color: var(--slate);
+    max-width: 480px;
+    margin: 0 auto 34px;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 60px;
+  }
+  .foot-bottom {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--slate);
+    opacity: 0.7;
+  }
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="nav-mark">SOLONGO BOLDTSEREN</div>
+    <div class="nav-links">
+      <a href="#journey">Journey</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="bin-grid" aria-hidden="true">
+      <span></span><span class="a"></span><span></span><span class="b"></span><span></span><span></span>
+      <span class="b"></span><span></span><span></span><span class="a"></span><span></span><span></span>
+      <span></span><span></span><span class="b"></span><span></span><span class="a"></span><span></span>
+      <span class="a"></span><span></span><span></span><span></span><span></span><span class="b"></span>
+    </div>
+    <div class="eyebrow">Seattle, WA · Open to relocation</div>
+    <h1 class="name">Solongo Boldtseren</h1>
+    <p class="role-line">
+      <strong>Supply Chain &amp; Analytics Professional.</strong> I've sourced from breweries, kept underground drill rigs running, and now build the dashboards that make those calls easier.
+    </p>
+    <div class="hero-links">
+      <a class="pill primary" href="https://warehouse-slotting-dashboard-d7mn4sgqs5bx9fdnp2wmei.streamlit.app" target="_blank" rel="noopener">→ Live Demo: Slotting App</a>
+      <a class="pill" href="https://www.linkedin.com/in/solongo-boldtseren" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://github.com/solongo5" target="_blank" rel="noopener">GitHub</a>
+      <a class="pill" href="mailto:solongo021685@gmail.com">Email</a>
+    </div>
+  </div>
+</header>
+
+<section id="journey">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Route</h2>
+    </div>
+
+    <div class="route reveal">
+      <div class="route-line" aria-hidden="true"></div>
+      <div class="route-stops">
+        <div class="stop">
+          <div class="stop-year">2016 – 2018</div>
+          <div class="stop-role">Category Manager</div>
+          <div class="stop-org">Zebra Int'l Distribution</div>
+          <div class="stop-desc">Sourcing, POs, and inbound logistics across 15+ international CPG suppliers.</div>
+        </div>
+        <div class="stop">
+          <div class="stop-year">2018 – 2023</div>
+          <div class="stop-role">Supply Chain Specialist</div>
+          <div class="stop-org">Epiroc (Rio Tinto mining)</div>
+          <div class="stop-desc">Demand &amp; maintenance planning for 40+ underground drill rigs. Owned a $15M ZBB spare parts budget.</div>
+        </div>
+        <div class="stop">
+          <div class="stop-year">2023 – 2025</div>
+          <div class="stop-role">Supply Chain Manager</div>
+          <div class="stop-org">Zebra Int'l Distribution</div>
+          <div class="stop-desc">Ran a $20M sourcing portfolio, led a team of four, grew margin 21% → 29%.</div>
+        </div>
+        <div class="stop">
+          <div class="stop-year">2025</div>
+          <div class="stop-role">M.S. Business Analytics</div>
+          <div class="stop-org">University of Washington</div>
+          <div class="stop-desc">Went back to build the technical depth to back up a decade of instinct.</div>
+        </div>
+        <div class="stop current">
+          <div class="stop-year">2025 – Present</div>
+          <div class="stop-role">BI Analyst</div>
+          <div class="stop-org">Keurig Dr Pepper</div>
+          <div class="stop-desc">Azure SQL, Python optimization, and an AI agent that answers warehouse questions in seconds.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+
+    <div class="about-text reveal">
+      <p>My journey started in consumer goods — sourcing, supplier negotiations, cost calculations. Then I went underground, literally: I spent years doing demand and maintenance planning for a Rio Tinto mining operation, keeping 40+ drill rigs and 120+ mechanics running with zero tolerance for stockouts on critical spare parts. Back then, my tools were SAP, Excel (the <em>advanced</em> kind), PowerPoint, and Canva. I learned that a well-built spreadsheet model can move a $15M budget as much as any fancy dashboard can.</p>
+
+      <p>I came back to CPG with sharper instincts and bigger ambitions — this time managing a $20M global sourcing portfolio across 15+ countries, leading a team of four, and owning S&amp;OP planning with Sales, Finance, and Marketing. One of the perks I never took for granted: flying to Molson Coors, Carlsberg, and other world-class breweries and HQs for in-person contract negotiations, and building a category portfolio. Along the way I kept asking the same question: how do I make the case for a decision with data, not just instinct?</p>
+
+      <p>That question is what pulled me deeper into analytics. I learned SQL, Python, Tableau, and Power BI on top of the operational playbook I already knew — and eventually machine learning. I've landed somewhere I like: someone who's sat in the warehouse, sat across the table in contract negotiations, and sat in the boardroom — and who can build the pipeline <em>and</em> explain what it means to a CEO, a mechanic, and a sales rep alike.</p>
+
+      <p>After years of making calls with imperfect data, I decided to go back and build the technical chops to back up my instincts — that's what brought me to UW's Master of Science in Business Analytics, which I wrapped up this year. Now I'm looking for supply chain or analytics roles where I can bring both sides: the leader who's made the tough call, and the analyst who can now prove it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Featured Projects</h2>
+    </div>
+
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-tag">Streamlit · Python · Azure SQL</div>
+        <div class="project-title">Warehouse Slotting Optimization Dashboard</div>
+        <div class="project-desc">Transformed 400K+ SAP inventory records into an Azure SQL data model, powering an interactive dashboard that flagged 59 relocation opportunities across 5,600+ storage bins and identified $150K–$300K in annual savings.</div>
+        <div class="project-links">
+          <a href="https://warehouse-slotting-dashboard-d7mn4sgqs5bx9fdnp2wmei.streamlit.app" target="_blank" rel="noopener">Live Demo →</a>
+          <a href="https://github.com/solongo5/warehouse-slotting-dashboard" target="_blank" rel="noopener">Source Code →</a>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-tag">Claude API · RAG</div>
+        <div class="project-title">AI Analytics Agent</div>
+        <div class="project-desc">Built a Claude + RAG-powered agent that lets warehouse operations staff query inventory data in plain English — cutting analysis time from roughly 20 minutes to seconds, no SQL required.</div>
+        <div class="project-links">
+          <a href="https://github.com/solongo5/warehouse-slotting-dashboard" target="_blank" rel="noopener">Source Code →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Technical Skillset</h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <h3>Data &amp; Programming</h3>
+        <div class="skill-tags">
+          <span>SQL</span><span>Python</span><span>Pandas</span><span>R</span><span>Azure SQL</span><span>ETL</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>BI &amp; Visualization</h3>
+        <div class="skill-tags">
+          <span>Tableau</span><span>Power BI</span><span>Streamlit</span><span>Excel</span><span>Data Storytelling</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>Supply Chain &amp; Ops</h3>
+        <div class="skill-tags">
+          <span>Strategic Sourcing</span><span>S&amp;OP</span><span>Demand Planning</span><span>Category Mgmt</span><span>Statistical Analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <h2>Let's talk supply chain, data, or both.</h2>
+    <p>Open to supply chain and analytics roles where operational judgment and technical depth both matter.</p>
+    <div class="footer-links">
+      <a class="pill primary" href="mailto:solongo021685@gmail.com">Email Me</a>
+      <a class="pill" href="https://www.linkedin.com/in/solongo-boldtseren" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://github.com/solongo5" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <div class="foot-bottom">Seattle, WA — built with care, not a template.</div>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
