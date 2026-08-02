@@ -218,7 +218,7 @@
   }
   .route-stops {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     position: relative;
   }
@@ -286,10 +286,30 @@
   /* ---------- PROJECTS ---------- */
   .projects-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 28px;
   }
-  @media (max-width: 780px) { .projects-grid { grid-template-columns: 1fr; } }
+
+  .project-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 780px) { .project-features { grid-template-columns: 1fr; } }
+  .feature h4 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--green-dark);
+    margin-bottom: 8px;
+  }
+  .feature p {
+    font-size: 14.5px;
+    color: var(--slate);
+    line-height: 1.55;
+  }
 
   .project-card {
     background: var(--white);
@@ -441,7 +461,7 @@
       <span></span><span></span><span class="b"></span><span></span><span class="a"></span><span></span>
       <span class="a"></span><span></span><span></span><span></span><span></span><span class="b"></span>
     </div>
-    <div class="eyebrow">Seattle, WA</div>
+    <div class="eyebrow">Seattle, WA · Open to relocation</div>
     <h1 class="name">Solongo Boldtseren</h1>
     <p class="role-line">
       <strong>Supply Chain &amp; Analytics Professional.</strong> I've sourced from breweries, kept underground drill rigs running, and now build the dashboards that make those calls easier.
@@ -467,13 +487,13 @@
       <div class="route-stops">
         <div class="stop">
           <div class="stop-year">2016 – 2018</div>
-          <div class="stop-role">Category/Supply Chain Manager</div>
+          <div class="stop-role">Category Manager</div>
           <div class="stop-org">Zebra Int'l Distribution</div>
           <div class="stop-desc">Sourcing, POs, and inbound logistics across 15+ international CPG suppliers.</div>
         </div>
         <div class="stop">
           <div class="stop-year">2018 – 2023</div>
-          <div class="stop-role">Supply Chain Specialist/Maintenance Planner</div>
+          <div class="stop-role">Supply Chain Specialist</div>
           <div class="stop-org">Epiroc (Rio Tinto mining)</div>
           <div class="stop-desc">Demand &amp; maintenance planning for 40+ underground drill rigs. Owned a $15M ZBB spare parts budget.</div>
         </div>
@@ -481,7 +501,7 @@
           <div class="stop-year">2023 – 2025</div>
           <div class="stop-role">Supply Chain Manager</div>
           <div class="stop-org">Zebra Int'l Distribution</div>
-          <div class="stop-desc">Ran a $20M sourcing portfolio, grew margin 21% → 29%.</div>
+          <div class="stop-desc">Ran a $20M sourcing portfolio, led a team of four, grew margin 21% → 29%. Earned an M.S. in Business Analytics from UW along the way.</div>
         </div>
         <div class="stop current">
           <div class="stop-year">2025 – Present</div>
@@ -517,25 +537,28 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-num">03</span>
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title">Featured Project</h2>
     </div>
 
     <div class="projects-grid">
       <div class="project-card reveal">
-        <div class="project-tag">Streamlit · Python · Azure SQL</div>
-        <div class="project-title">Warehouse Slotting Optimization Dashboard</div>
+        <div class="project-tag">Streamlit · Python · Azure SQL · Claude API · RAG</div>
+        <div class="project-title">Warehouse Slotting Optimization Platform</div>
         <div class="project-desc">Transformed 400K+ SAP inventory records into an Azure SQL data model, powering an interactive dashboard that flagged 59 relocation opportunities across 5,600+ storage bins and identified $150K–$300K in annual savings.</div>
+
+        <div class="project-features">
+          <div class="feature">
+            <h4>Slotting Dashboard</h4>
+            <p>Interactive ABC-classification and bin-relocation dashboard built for warehouse operations teams to act on directly.</p>
+          </div>
+          <div class="feature">
+            <h4>AI Analytics Agent</h4>
+            <p>A Claude + RAG-powered agent layered on top, letting staff query inventory data in plain English — cutting analysis time from roughly 20 minutes to seconds.</p>
+          </div>
+        </div>
+
         <div class="project-links">
           <a href="https://warehouse-slotting-dashboard-d7mn4sgqs5bx9fdnp2wmei.streamlit.app" target="_blank" rel="noopener">Live Demo →</a>
-          <a href="https://github.com/solongo5/warehouse-slotting-dashboard" target="_blank" rel="noopener">Source Code →</a>
-        </div>
-      </div>
-
-      <div class="project-card reveal">
-        <div class="project-tag">Claude API · RAG</div>
-        <div class="project-title">AI Analytics Agent</div>
-        <div class="project-desc">Built a Claude + RAG-powered agent that lets warehouse operations staff query inventory data in plain English — cutting analysis time from roughly 20 minutes to seconds, no SQL required.</div>
-        <div class="project-links">
           <a href="https://github.com/solongo5/warehouse-slotting-dashboard" target="_blank" rel="noopener">Source Code →</a>
         </div>
       </div>
