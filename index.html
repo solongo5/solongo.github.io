@@ -92,6 +92,32 @@
     position: relative;
     overflow: hidden;
   }
+  .hero .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .hero-text { max-width: 620px; }
+  .hero-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid var(--white);
+    box-shadow: 0 8px 24px rgba(31,42,36,0.12);
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  @media (max-width: 780px) {
+    .hero .wrap { flex-direction: column-reverse; text-align: center; }
+    .hero-photo { width: 160px; height: 160px; }
+  }
+  
   .bin-grid {
     position: absolute;
     top: -40px;
@@ -461,18 +487,23 @@
       <span></span><span></span><span class="b"></span><span></span><span class="a"></span><span></span>
       <span class="a"></span><span></span><span></span><span></span><span></span><span class="b"></span>
     </div>
-    <div class="eyebrow">Seattle, WA</div>
-    <h1 class="name">Solongo Boldtseren</h1>
-    <p class="role-line">
-      <strong>Supply Chain &amp; Analytics Professional.</strong> I've sourced from breweries, kept underground drill rigs running, and now build the systems that turn raw operations data into six-figure decisions.
-    </p>
-    <div class="hero-links">
-      <a class="pill primary" href="https://warehouse-slotting-dashboard-d7mn4sgqs5bx9fdnp2wmei.streamlit.app" target="_blank" rel="noopener">→ Live Demo: Slotting App</a>
-      <a class="pill" href="https://www.linkedin.com/in/solongo-boldtseren" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="pill" href="https://github.com/solongo5" target="_blank" rel="noopener">GitHub</a>
-      <a class="pill" href="mailto:solongo021685@gmail.com">Email</a>
-    </div>
+    <div class="hero-text">
+  <div class="eyebrow">Seattle, WA · Open to relocation</div>
+  <h1 class="name">Solongo Boldtseren</h1>
+  <p class="role-line">
+    <strong>Supply Chain &amp; Analytics Professional.</strong> I've sourced from breweries, kept underground drill rigs running, and now build the systems that turn raw operations data into six-figure decisions.
+  </p>
+  <div class="hero-links">
+    <a class="pill primary" href="https://warehouse-slotting-dashboard-d7mn4sgqs5bx9fdnp2wmei.streamlit.app" target="_blank" rel="noopener">→ Live Demo: Slotting App</a>
+    <a class="pill" href="https://www.linkedin.com/in/solongo-boldtseren" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="pill" href="https://github.com/solongo5" target="_blank" rel="noopener">GitHub</a>
+    <a class="pill" href="mailto:solongo021685@gmail.com">Email</a>
   </div>
+</div>
+
+<div class="hero-photo">
+  <img src="IMG_4777.jpg" alt="Solongo Boldtseren">
+</div>
 </header>
 
 <section id="journey">
